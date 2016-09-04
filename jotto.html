@@ -4,9 +4,9 @@
     <style type="text/css">
       .A-no  { color: red; text-decoration: line-through; }
       .A-yes  { color: green; }
-      .A-un { color: black; }
-      .A-cir { position: absolute; color: red; font-size: 175%; left: -8px; top: -10px; z-index: -5; }
-      .A-dia { position: absolute; color: #3ae33a; font-size: 250%; left: -5px; top: -12px; z-index: -10; }
+      .A-un { color: black; font-size: 0.5in;}
+      .A-cir { position: absolute; color: red; font-size: 0.6in; left: -0.1in; top: -0.22in; z-index: -5; }
+      .A-dia { position: absolute; color: #3ae33a; font-size: 0.8in; left: -0.05in; top: -0.25in; z-index: -10; }
       .A-let { position: relative; display: inline; margin: 10px;}
     </style>
     
@@ -77,7 +77,7 @@
         var number = document.getElementById("Jotto-Number-Box").value;
         console.log(text);
         var word = document.createElement('div');
-        word.style="margin-top: 5px;";
+        word.style="margin-top: 5px; font-size: 0.3in;";
         var tmpWord="";
         for (i=0; i<text.length; i++) {
           var color="black";
@@ -88,7 +88,7 @@
           }
           tmpWord += '<span name="Jotto-Letter-'+text[i].toUpperCase()+'" style="color: '+color+';">'+text[i]+'</span>';
         }
-        tmpWord+='<div style="display: inline; left: 100px; position: absolute;"><input type="number" style="width: 40px;" value="'+number+'" /></div>';
+        tmpWord+='<div style="display: inline; left: 100px; position: absolute;"><input type="number" style="width: 40px; font-size: 0.3in;" value="'+number+'" /></div>';
         word.innerHTML=tmpWord;
         document.getElementById("Jotto-Words").appendChild(word);
         document.getElementById("Jotto-Word-Box").value="";
@@ -251,9 +251,9 @@
     </div>
     
     <div style="margin-top: 5px;">
-      <input type="text" id="Jotto-Word-Box" style="width: 88px;" onKeyUp="checkEnter(event);" />
-      <input type="number" id="Jotto-Number-Box" style="width: 40px;" onKeyUp="checkEnter(event);" />
-      <input type="button" id="Jotto-Word-Button" value="Add" onClick="addWord();"/>
+      <input type="text" id="Jotto-Word-Box" style="width: 88px; font-size: 0.3in;" onKeyUp="checkEnter(event);" />
+      <input type="number" id="Jotto-Number-Box" style="width: 40px; font-size: 0.3in;" onKeyUp="checkEnter(event);" />
+      <input type="button" id="Jotto-Word-Button" value="Add" style="font-size: 0.3in;" onClick="addWord();"/>
     </div>
   
   </body>
