@@ -1,0 +1,260 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+      .A-no  { color: red; text-decoration: line-through; }
+      .A-yes  { color: green; }
+      .A-un { color: black; }
+      .A-cir { position: absolute; color: red; font-size: 175%; left: -8px; top: -10px; z-index: -5; }
+      .A-dia { position: absolute; color: #3ae33a; font-size: 250%; left: -5px; top: -12px; z-index: -10; }
+      .A-let { position: relative; display: inline; margin: 10px;}
+    </style>
+    
+    <script type="text/javascript">
+      var Jotto_Alphabet={
+        A : { yes : false, no : false },
+        B : { yes : false, no : false },
+        C : { yes : false, no : false },
+        D : { yes : false, no : false },
+        E : { yes : false, no : false },
+        F : { yes : false, no : false },
+        G : { yes : false, no : false },
+        H : { yes : false, no : false },
+        I : { yes : false, no : false },
+        J : { yes : false, no : false },
+        K : { yes : false, no : false },
+        L : { yes : false, no : false },
+        M : { yes : false, no : false },
+        N : { yes : false, no : false },
+        O : { yes : false, no : false },
+        P : { yes : false, no : false },
+        Q : { yes : false, no : false },
+        R : { yes : false, no : false },
+        S : { yes : false, no : false },
+        T : { yes : false, no : false },
+        U : { yes : false, no : false },
+        V : { yes : false, no : false },
+        W : { yes : false, no : false },
+        X : { yes : false, no : false },
+        Y : { yes : false, no : false },
+        Z : { yes : false, no : false }
+      };
+      
+      function changeLetter(ev) {
+        var letter = ev.target.id.slice(-1);
+        console.log("changeLetter("+letter+")");
+        if (document.getElementById(ev.target.id+"-cir").style.display=="none" && document.getElementById(ev.target.id+"-dia").style.display=="none"){
+          Jotto_Alphabet[letter].yes=false;
+          Jotto_Alphabet[letter].no=true;
+        } else if (document.getElementById(ev.target.id+"-cir").style.display=="" && document.getElementById(ev.target.id+"-dia").style.display=="none"){
+          Jotto_Alphabet[letter].yes=true;
+          Jotto_Alphabet[letter].no=false;
+        } else if (document.getElementById(ev.target.id+"-cir").style.display=="none" && document.getElementById(ev.target.id+"-dia").style.display==""){
+          Jotto_Alphabet[letter].yes=false;
+          Jotto_Alphabet[letter].no=false;
+        }
+        if (Jotto_Alphabet[letter].yes){
+          document.getElementById(ev.target.id+"-dia").style.display="";
+        } else {
+          document.getElementById(ev.target.id+"-dia").style.display="none";
+        }
+        if (Jotto_Alphabet[letter].no){
+          document.getElementById(ev.target.id+"-cir").style.display="";
+        } else {
+          document.getElementById(ev.target.id+"-cir").style.display="none";
+        }
+        updateLetter(letter);
+      }
+      
+      function checkEnter(ev) {
+        if (ev.keyCode==13){
+          addWord();
+        }
+      }
+      
+      function addWord() {
+        var text = document.getElementById("Jotto-Word-Box").value;
+        var number = document.getElementById("Jotto-Number-Box").value;
+        console.log(text);
+        var word = document.createElement('div');
+        word.style="margin-top: 5px;";
+        var tmpWord="";
+        for (i=0; i<text.length; i++) {
+          var color="black";
+          if (Jotto_Alphabet[text[i].toUpperCase()].yes) {
+            color="#3ae33a";
+          } else if (Jotto_Alphabet[text[i].toUpperCase()].no) {
+            color="red";
+          }
+          tmpWord += '<span name="Jotto-Letter-'+text[i].toUpperCase()+'" style="color: '+color+';">'+text[i]+'</span>';
+        }
+        tmpWord+='<div style="display: inline; left: 100px; position: absolute;"><input type="number" style="width: 40px;" value="'+number+'" /></div>';
+        word.innerHTML=tmpWord;
+        document.getElementById("Jotto-Words").appendChild(word);
+        document.getElementById("Jotto-Word-Box").value="";
+        document.getElementById("Jotto-Number-Box").value="";
+        document.getElementById("Jotto-Word-Box").focus();
+      }
+      
+      function updateLetter(letter) {
+        var divs = document.getElementsByName("Jotto-Letter-"+letter);
+        var color="black";
+        if (Jotto_Alphabet[letter].yes) {
+          color="#3ae33a";
+        } else if (Jotto_Alphabet[letter].no) {
+          color="red";
+        }
+        for (i=0; i<divs.length; i++) {
+          divs[i].style.color=color;
+        }
+      }
+      
+    </script>
+  </head>
+  <body>
+  
+    <div style="line-height: 2.5em;">
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-A-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-A-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-A" onClick="changeLetter(event);">A</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-B-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-B-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-B" onClick="changeLetter(event);">B</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-C-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-C-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-C" onClick="changeLetter(event);">C</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-D-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-D-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-D" onClick="changeLetter(event);">D</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-E-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-E-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-E" onClick="changeLetter(event);">E</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-F-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-F-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-F" onClick="changeLetter(event);">F</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-G-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-G-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-G" onClick="changeLetter(event);">G</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-H-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-H-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-H" onClick="changeLetter(event);">H</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-I-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-I-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-I" onClick="changeLetter(event);">I</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-J-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-J-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-J" onClick="changeLetter(event);">J</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-K-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-K-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-K" onClick="changeLetter(event);">K</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-L-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-L-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-L" onClick="changeLetter(event);">L</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-M-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-M-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-M" onClick="changeLetter(event);">M</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-N-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-N-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-N" onClick="changeLetter(event);">N</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-O-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-O-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-O" onClick="changeLetter(event);">O</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-P-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-P-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-P" onClick="changeLetter(event);">P</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-Q-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-Q-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-Q" onClick="changeLetter(event);">Q</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-R-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-R-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-R" onClick="changeLetter(event);">R</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-S-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-S-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-S" onClick="changeLetter(event);">S</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-T-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-T-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-T" onClick="changeLetter(event);">T</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-U-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-U-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-U" onClick="changeLetter(event);">U</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-V-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-V-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-V" onClick="changeLetter(event);">V</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-W-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-W-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-W" onClick="changeLetter(event);">W</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-X-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-X-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-X" onClick="changeLetter(event);">X</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-Y-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-Y-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-Y" onClick="changeLetter(event);">Y</span>
+      </div>
+      <div class="A-let">
+        <div class="A-cir" id="Jotto-Z-cir" style="display:none;">&#8709;</div>
+        <div class="A-dia" id="Jotto-Z-dia" style="display:none;">&#9830;</div>
+        <span class="A-un" id="Jotto-Z" onClick="changeLetter(event);">Z</span>
+      </div>
+    </div>
+    
+    <div id="Jotto-Words">
+    
+    </div>
+    
+    <div style="margin-top: 5px;">
+      <input type="text" id="Jotto-Word-Box" style="width: 88px;" onKeyUp="checkEnter(event);" />
+      <input type="number" id="Jotto-Number-Box" style="width: 40px;" onKeyUp="checkEnter(event);" />
+      <input type="button" id="Jotto-Word-Button" value="Add" onClick="addWord();"/>
+    </div>
+  
+  </body>
+</html>
