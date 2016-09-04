@@ -86,7 +86,7 @@
           }
           tmpWord += '<span name="Jotto-Letter-'+text[i].toUpperCase()+'" style="color: '+color+';">'+text[i]+'</span>';
         }
-        tmpWord+='<div style="display: inline; left: 3.5in; position: absolute;"><input type="number" style="width: 1.0in; font-size: 0.8in;" value="'+number+'" /></div>';
+        tmpWord+='<div style="display: inline; left: 4.1in; position: absolute;"><input type="number" style="width: 1.0in; font-size: 0.8in;" value="'+number+'" /></div>';
         word.innerHTML=tmpWord;
         document.getElementById("Jotto-Words").appendChild(word);
         document.getElementById("Jotto-Word-Box").value="";
@@ -197,8 +197,8 @@
     </div>
     
     <div style="margin-top: 5px;">
-      <input type="text" id="Jotto-Word-Box" style="width: 3.0in; font-size: 0.8in;" onKeyUp="checkEnter(event);" />
-      <input type="number" id="Jotto-Number-Box" style="width: 1.0in; font-size: 0.8in;" onKeyUp="checkEnter(event);" />
+      <input type="text" id="Jotto-Word-Box" style="width: 4.0in; font-size: 0.8in;" placeholder="Word" onKeyUp="checkEnter(event);" />
+      <input type="number" id="Jotto-Number-Box" style="width: 1.0in; font-size: 0.8in;" placeholder="#" onKeyUp="checkEnter(event);" />
       <input type="button" id="Jotto-Word-Button" value="Add" style="font-size: 0.8in;" onClick="addWord();"/>
     </div>
   
